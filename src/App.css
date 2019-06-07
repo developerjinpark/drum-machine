@@ -1,33 +1,39 @@
-.App {
-  text-align: center;
+* {
+  padding:0;margin:0;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
+#drum-machine {
+  margin-top: 25vh;
+  display: grid;
+  grid-template-columns: 50% 50%;
+}
+#display {
+  background-color: hsl(150, 100%, 90%);
+}
+#display, .drum-pad {
+  display: grid;
+  align-content: center;
+  justify-items: center;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.drum-pads {
+  display: grid;
+  grid-template-columns: 5rem 5rem 5rem;
+  grid-template-rows: 5rem 5rem 5rem;
+  grid-gap: 10px;
 }
 
-.App-link {
-  color: #61dafb;
+.drum-pad {
+  background-color: hsl(150, 100%, 25%);
+  font-weight: bold;
+  font-size: 2rem;
+  color: hsl(150, 100%, 97%);
+  box-shadow: 4px 4px 3px hsl(150, 100%, 10%);
+  border-radius: 5px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.drum-pad:hover {
+  cursor: pointer;
+  background-color: hsl(150, 100%, 40%);
+  font-size: 3rem;
 }
