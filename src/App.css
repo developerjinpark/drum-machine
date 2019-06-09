@@ -7,10 +7,15 @@
   display: grid;
   grid-template-columns: 50% 50%;
 }
+
 #display {
   background-color: hsl(150, 100%, 90%);
+  padding: 10px;
+  width: 10rem;
+  height: 4rem;
+  font-weight: bold;
 }
-#display, .drum-pad {
+.drum-display, #display, .drum-pad {
   display: grid;
   align-content: center;
   justify-items: center;
@@ -30,10 +35,4 @@
   color: hsl(150, 100%, 97%);
   box-shadow: 4px 4px 3px hsl(150, 100%, 10%);
   border-radius: 5px;
-}
-
-.drum-pad:hover {
-  cursor: pointer;
-  background-color: hsl(150, 100%, 40%);
-  font-size: 3rem;
 }
