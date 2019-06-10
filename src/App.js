@@ -43,8 +43,8 @@ class App extends React.Component {
   }
 
   onKeyDown(e) {
-    if (e.key === 'q' || e.key === 'w' || e.key === 'e' || e.key === 'a' || e.key === 's' || e.key === 'd' || e.key === 'z' || e.key === 'x' || e.key === 'c') {
-      let key = e.key.toUpperCase();
+    let key = e.key.toUpperCase();
+    if (key === 'Q' || key === 'W' || key === 'E' || key === 'A' || key === 'S' || key === 'D' || key === 'Z' || key === 'X' || key === 'C') {
       let display = document.getElementById(key).parentElement.id.replace(/_/g, ' ');
       this.setState({
         display,
@@ -60,8 +60,8 @@ class App extends React.Component {
         </div>
         <div className="drum-pads">
           <div id="Heater-1" className="drum-pad" onClick={this.handleClick}>
-            <audio src="https://s3.amazonaws.com/freecodecamp/drums/Heater-1.mp3" type="audio/mpeg" className="clip" id="Q"></audio>
             Q
+            <audio src="https://s3.amazonaws.com/freecodecamp/drums/Heater-1.mp3" type="audio/mpeg" className="clip" id="Q"></audio>
           </div>
           <div id="Heater-2" className="drum-pad" onClick={this.handleClick}>
             W
