@@ -1,5 +1,10 @@
 import React from 'react';
 import './App.css';
+import Pads from './Pads';
+import DrumPad from './DrumPad';
+
+const preStyle = "background-color: hsl(150, 100%, 25%);font-weight: bold;font-size: 2rem;color: hsl(150, 100%, 97%);box-shadow: 4px 4px 3px hsl(150, 100%, 10%);border-radius: 5px;";
+const hoverStyle = "cursor: pointer;background-color: hsl(150, 100%, 40%);font-size: 3rem;";
 
 class App extends React.Component {
   constructor(props) {
@@ -12,19 +17,16 @@ class App extends React.Component {
     this.onKeyDown = this.onKeyDown.bind(this);
   }
 
-  handleClick(e) {
-    console.log(e.target.children[0].id);
+  handleClick(display, id) {
     this.setState({
-      display: e.target.id,
-      id: e.target.children[0].id
+      display,
+      id
     });
   }
 
   componentDidUpdate() {
     console.log(document.getElementById(this.state.id));
     let pad = document.getElementById(this.state.display);
-    const preStyle = " background-color: hsl(150, 100%, 25%);font-weight: bold;font-size: 2rem;color: hsl(150, 100%, 97%);box-shadow: 4px 4px 3px hsl(150, 100%, 10%);border-radius: 5px;";
-    const hoverStyle = "cursor: pointer;background-color: hsl(150, 100%, 40%);font-size: 3rem;";
     pad.setAttribute('style', hoverStyle);
     setTimeout( () => {
       pad.setAttribute('style', preStyle);
@@ -44,8 +46,9 @@ class App extends React.Component {
 
   onKeyDown(e) {
     let key = e.key.toUpperCase();
-    if (key === 'Q' || key === 'W' || key === 'E' || key === 'A' || key === 'S' || key === 'D' || key === 'Z' || key === 'X' || key === 'C') {
-      let display = document.getElementById(key).parentElement.id.replace(/_/g, ' ');
+    // console.log(pads.filter(p => p.letter === key).length > 0);
+    if (Pads.filter( p => p.letter === key).length > 0) {
+      let display = document.getElementById(key).parentElement.id;
       this.setState({
         display,
         id: key
@@ -59,42 +62,9 @@ class App extends React.Component {
           <div id="display">{this.state.display}</div>
         </div>
         <div className="drum-pads">
-          <div id="Heater-1" className="drum-pad" onClick={this.handleClick}>
-            Q
-            <audio src="https://s3.amazonaws.com/freecodecamp/drums/Heater-1.mp3" type="audio/mpeg" className="clip" id="Q"></audio>
-          </div>
-          <div id="Heater-2" className="drum-pad" onClick={this.handleClick}>
-            W
-            <audio src="https://s3.amazonaws.com/freecodecamp/drums/Heater-2.mp3" type="audio/mpeg" className="clip" id="W"></audio>
-          </div>
-          <div id="Heater-3" className="drum-pad" onClick={this.handleClick}>
-            E
-            <audio src="https://s3.amazonaws.com/freecodecamp/drums/Heater-3.mp3" type="audio/mpeg" className="clip" id="E"></audio>
-          </div>
-          <div id="Heater-4" className="drum-pad" onClick={this.handleClick}>
-            A
-            <audio src="https://s3.amazonaws.com/freecodecamp/drums/Heater-4_1.mp3" type="audio/mpeg" className="clip" id="A"></audio>
-          </div>
-          <div id="Clap" className="drum-pad" onClick={this.handleClick}>
-            S
-            <audio src="https://s3.amazonaws.com/freecodecamp/drums/Heater-6.mp3" type="audio/mpeg" className="clip" id="S"></audio>
-          </div>
-          <div id="Open-HH" className="drum-pad" onClick={this.handleClick}>
-            D
-            <audio src="https://s3.amazonaws.com/freecodecamp/drums/Dsc_Oh.mp3" type="audio/mpeg" className="clip" id="D"></audio>
-          </div>
-          <div id="Kick-n'-Hat" className="drum-pad" onClick={this.handleClick}>
-            Z
-            <audio src="https://s3.amazonaws.com/freecodecamp/drums/Kick_n_Hat.mp3" type="audio/mpeg" className="clip" id="Z"></audio>
-          </div>
-          <div id="Kick" className="drum-pad" onClick={this.handleClick}>
-            X
-            <audio src="https://s3.amazonaws.com/freecodecamp/drums/RP4_KICK_1.mp3" type="audio/mpeg" className="clip" id="X"></audio>
-          </div>
-          <div id="Closed-HH" className="drum-pad" onClick={this.handleClick}>
-            C
-            <audio src="https://s3.amazonaws.com/freecodecamp/drums/Cev_H2.mp3" type="audio/mpeg" className="clip" id="C"></audio>
-          </div>
+          {Pads.map( (pad, index) => 
+            <DrumPad pad={pad} drumClick={this.handleClick} key={index} />
+          )}
         </div>
       </div>
     );
