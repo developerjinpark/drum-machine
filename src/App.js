@@ -11,10 +11,12 @@ class App extends React.Component {
     super(props);
     this.state = {
       display: '',
-      id: ''
+      id: '',
+      volume: 0.4
     }
     this.handleClick = this.handleClick.bind(this);
     this.onKeyDown = this.onKeyDown.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   handleClick(display, id) {
@@ -24,16 +26,25 @@ class App extends React.Component {
     });
   }
 
+  handleChange(e) {
+    this.setState({
+      volume: e.target.value
+    })
+  }
+
   componentDidUpdate() {
-    console.log(document.getElementById(this.state.id));
-    let pad = document.getElementById(this.state.display);
-    pad.setAttribute('style', clickedStyle);
-    setTimeout( () => {
-      pad.setAttribute('style', preStyle);
-    }, 200);
-    let vid = document.getElementById(this.state.id);
-    vid.currentTime = 0;
-    vid.play();
+    if (document.getElementById(this.state.id) !== null) {
+      console.log(document.getElementById(this.state.id));
+      let pad = document.getElementById(this.state.display);
+      pad.setAttribute('style', clickedStyle);
+      setTimeout( () => {
+        pad.setAttribute('style', preStyle);
+      }, 200);
+      let vid = document.getElementById(this.state.id);
+      vid.currentTime = 0;
+      vid.volume = this.state.volume;
+      vid.play();
+    }
   }
 
   componentDidMount() {
@@ -60,10 +71,11 @@ class App extends React.Component {
       <div id="drum-machine">
         <div className="drum-display">
           <div id="display">{this.state.display}</div>
+          <input id="slider" type="range" min="0" max="1" value={this.state.volume} onChange={this.handleChange} step="0.2" />
         </div>
         <div className="drum-pads">
           {Pads.map( (pad, index) => 
-            <DrumPad pad={pad} drumClick={this.handleClick} key={index} />
+            <DrumPad pad={pad} drumClick={this.handleClick} key={index} volume={this.state.volume}/>
           )}
         </div>
       </div>

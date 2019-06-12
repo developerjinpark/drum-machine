@@ -130,3 +130,38 @@ render() {
     <div className="drum-pads">
       {Pads.map( (pad, index) => <DrumPad pad={pad} drumClick={this.handleClick} key={index} />
 ```
+
+To add a volume controller
+
+```jsx
+// On App.js
+this.state = {
+  display: '',
+  id: '',
+  volume: 0.4
+}
+
+handleChange(e) {
+  this.setState({
+    volume: e.target.value
+  });
+}
+componentDidUpdate() {
+  // To check if a button’s clicked or typed
+  if (document.getElementById(this.state.id) !== null) {  
+    :
+    aid.volume = this.state.volume;
+    aid.play();
+  }
+}
+render () {
+  return (
+      :
+      <input id=”slider” type=”range” min=”0” max=”1” value={this.state.volume} onChange={this.handleChange} step=”0.2” />
+    </div>
+    <div className="drum-pads">
+      {Pads.map( …  volume={this.state.volume} /> )}
+
+// On DrumPad.js
+<audio …  volume={props.volume}></audio>
+```
