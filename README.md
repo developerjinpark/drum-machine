@@ -21,3 +21,112 @@ User Story:
 6. When I press the trigger key associated with each .drum-pad, the audio clip contained in its child audio element should be triggered (e.g. pressing the Q key should trigger the drum pad which contains the string "Q", pressing the W key should trigger the drum pad which contains the string "W", etc.).
 
 7. When a .drum-pad is triggered, a string describing the associated audio clip is displayed as the inner text of the #display element (each string must be unique).
+
+**Note:**
+
+To handle a button click
+
+```jsx
+// On App.js
+handleClick(event) {
+  this.setState({
+    display: event.target.id,
+    id: event.target.children[0].id
+  });
+}
+render() {
+  return (
+    :
+    <div className="drum-pads">
+      <div id="Header-1" className="drum-pad" onClick={this.handleClick}>
+```
+
+To handle a key down
+
+```jsx
+// On App.js
+componentDidMount() {
+  document.addEventListener('keydown', this.onKeyDown);
+}
+componentWillUnmount() {
+  document.addEventListener('keydown', this.onKeyDown);
+}
+onKeyDown(event) {
+  let key = event.key.toUpperCase();
+  if (pads.filter( pad => pad.letter === key).length > 0) {
+    let display = document.getElementById(key).parentElement.id;
+    this.setState({
+      display,
+      id: key
+    });
+  }
+}
+```
+
+To play audio
+
+```jsx
+// On App.js
+componentDidUpdate() {
+  let aid = document.getElementById(this.state.id);
+  aid.currentTime = 0;
+  aid.play();
+}
+```
+
+To change display of button
+
+```jsx
+// On App.js
+const preStyle = "font-weight:bold;font-size:2rem; background-color:hsl(150,100%,25%); color:hsl(150,100%,97%);box-shadow:4px 4px 3px hsl(150,100%,10%);border-radius:5px;";
+const clickedStyle = "cursor:pointer;font-size:3rem;background-color:hsl(150,100%,40%)";
+componentDidUpdate() {
+  let pad = document.getElementById(this.state.display);
+  pad.setAttribute('style', clickedStyle);
+  setTimeout( () => {
+    pad.setAttribute('style', preStyle);
+  }, 200);
+}
+```
+
+To separate drum-pad and using map
+
+```jsx
+// On Pads.js
+const Pads = [
+  {
+    letter: "Q",
+    sound: "Heater-1",
+    source: "Heater-1"
+  }, {
+    :
+  }
+];
+Export default Pads
+
+// On DrumPad.js
+import React from 'react';
+const DrumPad = props => {
+  return (
+    <div id={props.pad.sound} className="drum-pad" onClick={ () => {props.drumClick(props.pad.sound, props.pad.letter)}}>
+      {props.pad.letter}
+      <audio src={"https://s3.amazonaws.com/freecodecamp/drums/" + props.pad.source + ".mp3"} type="audio/mpeg" className="clip" id={props.pad.letter}></audio>
+    </div>
+  );
+}
+export default DrumPad
+
+// On App.js
+import Pads from './Pads';
+import DrumPad from './DrumPad';
+handleClick(display, id) {
+  this.setState({
+    display,
+    id
+  });
+}
+render() {
+  return (
+    <div className="drum-pads">
+      {Pads.map( (pad, index) => <DrumPad pad={pad} drumClick={this.handleClick} key={index} />
+```

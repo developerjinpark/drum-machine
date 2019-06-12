@@ -4,7 +4,7 @@ import Pads from './Pads';
 import DrumPad from './DrumPad';
 
 const preStyle = "background-color: hsl(150, 100%, 25%);font-weight: bold;font-size: 2rem;color: hsl(150, 100%, 97%);box-shadow: 4px 4px 3px hsl(150, 100%, 10%);border-radius: 5px;";
-const hoverStyle = "cursor: pointer;background-color: hsl(150, 100%, 40%);font-size: 3rem;";
+const clickedStyle = "cursor: pointer;background-color: hsl(150, 100%, 40%);font-size: 3rem;";
 
 class App extends React.Component {
   constructor(props) {
@@ -27,7 +27,7 @@ class App extends React.Component {
   componentDidUpdate() {
     console.log(document.getElementById(this.state.id));
     let pad = document.getElementById(this.state.display);
-    pad.setAttribute('style', hoverStyle);
+    pad.setAttribute('style', clickedStyle);
     setTimeout( () => {
       pad.setAttribute('style', preStyle);
     }, 200);
