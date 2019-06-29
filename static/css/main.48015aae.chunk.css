@@ -1,0 +1,2 @@
+*{padding:0;margin:0}#drum-machine{margin-top:25vh;display:grid;grid-template-columns:50% 50%}#display,#slider{background-color:#ccffe6;padding:10px;width:10rem;height:4rem;font-weight:700}#display,.drum-display,.drum-pad{display:grid;align-content:center;justify-items:center}.drum-pads{display:grid;grid-template-columns:5rem 5rem 5rem;grid-template-rows:5rem 5rem 5rem;grid-gap:10px}.drum-pad{background-color:#008040;font-weight:700;font-size:2rem;color:#f0fff7;box-shadow:4px 4px 3px #00331a;border-radius:5px}
+/*# sourceMappingURL=main.48015aae.chunk.css.map */
