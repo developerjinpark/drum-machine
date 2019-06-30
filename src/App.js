@@ -10,7 +10,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      display: '',
+      display: 'Display',
       id: '',
       volume: 0.4
     }
@@ -29,7 +29,7 @@ class App extends React.Component {
   handleChange(e) {
     this.setState({
       volume: e.target.value
-    })
+    });
   }
 
   componentDidUpdate() {
@@ -56,6 +56,7 @@ class App extends React.Component {
   }
 
   onKeyDown(e) {
+    console.log(e, this.state.volume);
     let key = e.key.toUpperCase();
     // console.log(pads.filter(p => p.letter === key).length > 0);
     if (Pads.filter( p => p.letter === key).length > 0) {
@@ -64,20 +65,43 @@ class App extends React.Component {
         display,
         id: key
       });
+    } else if (key === 'ARROWRIGHT' && this.state.volume < 1) {
+      console.log('arrow key entered: ' + key);
+      this.setState({
+        volume: Math.round((this.state.volume + 0.2) * 10) / 10
+      });
+    } else if (key === 'ARROWLEFT' && this.state.volume > 0.1) {
+      this.setState({
+        volume: Math.round((this.state.volume - 0.2) * 10) / 10
+      });
     }
   }
   render() {
     return (
-      <div id="drum-machine">
-        <div className="drum-display">
-          <div id="display">{this.state.display}</div>
-          <input id="slider" type="range" min="0" max="1" value={this.state.volume} onChange={this.handleChange} step="0.2" />
+      <div id="container">
+        <header>
+          <h1>Drum Machine (using keypad)</h1>
+        </header>
+        <div id="drum-machine">
+          <div className="drum-display">
+            <div id="display">
+              <p>{this.state.display}</p>
+            </div>
+            <div id="volume">
+              <p id="volume-label">Volume:</p>
+              <span id="volume-value">{this.state.volume * 10}</span>
+              <input id="slider" type="range" min="0" max="1" value={this.state.volume} onChange={this.handleChange} step="0.2" />
+            </div>
+          </div>
+          <div className="drum-pads">
+            {Pads.map( (pad, index) => 
+              <DrumPad pad={pad} drumClick={this.handleClick} key={index} volume={this.state.volume}/>
+            )}
+          </div>
         </div>
-        <div className="drum-pads">
-          {Pads.map( (pad, index) => 
-            <DrumPad pad={pad} drumClick={this.handleClick} key={index} volume={this.state.volume}/>
-          )}
-        </div>
+        <footer>
+          <p>Designed and Coded by <b>Jin Park</b></p>
+        </footer>
       </div>
     );
   }
