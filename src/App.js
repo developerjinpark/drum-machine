@@ -34,7 +34,7 @@ class App extends React.Component {
 
   componentDidUpdate() {
     if (document.getElementById(this.state.id) !== null) {
-      console.log(document.getElementById(this.state.id));
+      // console.log(document.getElementById(this.state.id));
       let pad = document.getElementById(this.state.display);
       pad.setAttribute('style', clickedStyle);
       setTimeout( () => {
@@ -56,21 +56,21 @@ class App extends React.Component {
   }
 
   onKeyDown(e) {
-    console.log(e, this.state.volume);
-    let key = e.key.toUpperCase();
+    // console.log(e, this.state.volume);
+    let input = e.key.toUpperCase();
     // console.log(pads.filter(p => p.letter === key).length > 0);
-    if (Pads.filter( p => p.letter === key).length > 0) {
-      let display = document.getElementById(key).parentElement.id;
+    if (Pads.filter( p => p.letter === input).length > 0) {
+      let display = document.getElementById(input).parentElement.id;
       this.setState({
         display,
-        id: key
+        id: input
       });
-    } else if (key === 'ARROWRIGHT' && this.state.volume < 1) {
-      console.log('arrow key entered: ' + key);
+    } else if (input === 'ARROWUP' && this.state.volume < 1) {
+      // console.log('arrow input entered: ' + input);
       this.setState({
         volume: Math.round((this.state.volume + 0.2) * 10) / 10
       });
-    } else if (key === 'ARROWLEFT' && this.state.volume > 0.1) {
+    } else if (input === 'ARROWDOWN' && this.state.volume > 0.1) {
       this.setState({
         volume: Math.round((this.state.volume - 0.2) * 10) / 10
       });
@@ -80,7 +80,8 @@ class App extends React.Component {
     return (
       <div id="container">
         <header>
-          <h1>Drum Machine (using keypad)</h1>
+          <h1>Drum Machine</h1>
+          <h3>(play by keypad)</h3>
         </header>
         <div id="drum-machine">
           <div className="drum-display">
@@ -95,7 +96,7 @@ class App extends React.Component {
           </div>
           <div className="drum-pads">
             {Pads.map( (pad, index) => 
-              <DrumPad pad={pad} drumClick={this.handleClick} key={index} volume={this.state.volume}/>
+              <DrumPad pad={pad} drumClick={this.handleClick} key={pad.letter + index} volume={this.state.volume}/>
             )}
           </div>
         </div>
