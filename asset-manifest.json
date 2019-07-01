@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/drum-machine/static/css/main.81ce4f01.chunk.css",
-    "main.js": "/drum-machine/static/js/main.801abaeb.chunk.js",
-    "main.js.map": "/drum-machine/static/js/main.801abaeb.chunk.js.map",
+    "main.css": "/drum-machine/static/css/main.08b87feb.chunk.css",
+    "main.js": "/drum-machine/static/js/main.960f9fcc.chunk.js",
+    "main.js.map": "/drum-machine/static/js/main.960f9fcc.chunk.js.map",
     "runtime~main.js": "/drum-machine/static/js/runtime~main.27309cc5.js",
     "runtime~main.js.map": "/drum-machine/static/js/runtime~main.27309cc5.js.map",
     "static/js/2.4e81ba5b.chunk.js": "/drum-machine/static/js/2.4e81ba5b.chunk.js",
     "static/js/2.4e81ba5b.chunk.js.map": "/drum-machine/static/js/2.4e81ba5b.chunk.js.map",
     "index.html": "/drum-machine/index.html",
-    "precache-manifest.fc4b8780fc466e63caca0c7f70272a81.js": "/drum-machine/precache-manifest.fc4b8780fc466e63caca0c7f70272a81.js",
+    "precache-manifest.2cc4902e7c094b0f635acaccc8c13276.js": "/drum-machine/precache-manifest.2cc4902e7c094b0f635acaccc8c13276.js",
     "service-worker.js": "/drum-machine/service-worker.js",
-    "static/css/main.81ce4f01.chunk.css.map": "/drum-machine/static/css/main.81ce4f01.chunk.css.map"
+    "static/css/main.08b87feb.chunk.css.map": "/drum-machine/static/css/main.08b87feb.chunk.css.map"
   }
 }
